@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - HawkCyber</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+
+    <header class="topbar">
+
+        <div class="logo">
+            <span>HawkCyber</span>
+        </div>
+
+        <div class="topbar-right">
+
+            <span class="connection">
+                <span class="connection-dot"></span>
+                Conectado
+            </span>
+
+            <button class="notification-btn" title="Notificações">
+                🔔
+            </button>
+
+            <div class="user-info">
+                <strong>Administrador</strong>
+                <span>ADM</span>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- LATERAL -->
+    <aside class="sidebar">
+
+        <nav>
+
+            <a href="dashboard.html" class="menu-item active">
+                <span>▣</span>
+                Dashboard
+            </a>
+
+            <a href="funcionarios.html" class="menu-item">
+                <span>♙</span>
+                Funcionários
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>▤</span>
+                Categorias
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>🍔</span>
+                Produtos
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>▦</span>
+                Mesas
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>📦</span>
+                Estoque
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>💰</span>
+                Caixa
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>▥</span>
+                Relatórios
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="#" class="menu-item">
+                <span>⚙</span>
+                Configurações
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>👤</span>
+                Meu perfil
+            </a>
+
+            <a href="index.html" class="menu-item logout">
+                <span>↪</span>
+                Sair
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <div class="page-header">
+
+            <div>
+                <h1>Dashboard</h1>
+                <p>Visão geral do restaurante</p>
+            </div>
+
+            <div class="header-actions">
+
+                <select id="periodo">
+                    <option value="hoje">Hoje</option>
+                    <option value="semana">Esta semana</option>
+                    <option value="mes">Este mês</option>
+                </select>
+
+                <button class="btn-secondary" id="btnFiltrar">
+                    FILTRAR
+                </button>
+
+                <button class="btn-primary" id="btnAtualizar">
+                    ATUALIZAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <section class="dashboard-cards">
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">💰</div>
+
+                <div class="card-info">
+                    <span>Faturamento</span>
+                    <strong>R$ 0.000,00</strong>
+                    <small>Hoje</small>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">🛒</div>
+
+                <div class="card-info">
+                    <span>Pedidos hoje</span>
+                    <strong>000</strong>
+                    <small>Pedidos registrados</small>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">🍽️</div>
+
+                <div class="card-info">
+                    <span>Mesas</span>
+
+                    <strong>
+                        <span class="mesa-ocupada">0</span>
+                        /
+                        <span class="mesa-livre">0</span>
+                    </strong>
+
+                    <small>Ocupadas / Livres</small>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">📦</div>
+
+                <div class="card-info">
+                    <span>Estoque baixo</span>
+                    <strong>1</strong>
+                    <small>Itens precisam de atenção</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- GRÁFICO -->
+        <section class="dashboard-panel chart-panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>Faturamento</h2>
+                    <p id="chartDescription">
+                        Faturamento dos últimos 7 dias
+                    </p>
+                </div>
+
+                <div class="chart-buttons">
+                    <button class="chart-btn active" data-chart="semana">
+                        Semana
+                    </button>
+
+                    <button class="chart-btn" data-chart="mes">
+                        Mês
+                    </button>
+
+                    <button class="chart-btn" data-chart="ano">
+                        Ano
+                    </button>
+                </div>
+            </div>
+
+            <!-- GRÁFICO -->
+            <div class="chart-container active">
+
+                <div class="chart-y" id="chartY">
+                    <!-- Valores da escala serão criados pelo JavaScript -->
+                </div>
+
+                <div class="chart-area">
+
+                    <!-- Linhas horizontais -->
+                    <div class="chart-lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <!-- Linha do gráfico -->
+                    <svg id="graficoLinha" viewBox="0 0 700 250" preserveAspectRatio="none">
+
+                        <polyline id="linhaGrafico" fill="none" stroke="var(--marrom)" stroke-width="4"
+                            stroke-linecap="round" stroke-linejoin="round"></polyline>
+
+                        <g id="pontosGrafico"></g>
+
+                    </svg>
+
+                    <div id="chartTooltip" class="chart-tooltip">
+                        <strong id="tooltipPeriodo"></strong>
+                        <span id="tooltipValor"></span>
+                    </div>
+
+                    <!-- Dias / períodos -->
+                    <div class="chart-labels" id="chartLabels">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- PAINEL -->
+        <section class="dashboard-grid">
+
+            <!-- PEDIDOS -->
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Pedidos em andamento</h2>
+                        <p>Acompanhamento dos pedidos atuais</p>
+                    </div>
+
+                    <span class="panel-number">6</span>
+
+                </div>
+
+                <div class="order-list">
+
+                    <div class="order-item">
+
+                        <div>
+                            <strong>Pedido #1</strong>
+                            <span>Mesa 05</span>
+                        </div>
+
+                        <span class="status preparing">
+                            EM PREPARO
+                        </span>
+
+                    </div>
+
+
+                    <div class="order-item">
+
+                        <div>
+                            <strong>Pedido #2</strong>
+                            <span>Mesa 02</span>
+                        </div>
+
+                        <span class="status received">
+                            RECEBIDO
+                        </span>
+
+                    </div>
+
+
+                    <div class="order-item">
+
+                        <div>
+                            <strong>Pedido #3</strong>
+                            <span>Mesa 08</span>
+                        </div>
+
+                        <span class="status ready">
+                            PRONTO
+                        </span>
+
+                    </div>
+
+
+                    <div class="order-item">
+
+                        <div>
+                            <strong>Pedido #4</strong>
+                            <span>Mesa 03</span>
+                        </div>
+
+                        <span class="status preparing">
+                            EM PREPARO
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ALERTAS -->
+            <div class="dashboard-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Alertas</h2>
+                        <p>Informações que precisam de atenção</p>
+                    </div>
+
+                    <span class="alert-count">3</span>
+
+                </div>
+
+                <div class="alert-list">
+
+                    <div class="alert-item">
+                        <span class="alert-icon">⚠</span>
+
+                        <div>
+                            <strong>Estoque baixo</strong>
+                            <p>1 produto(s) estão abaixo do estoque mínimo.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="alert-item">
+                        <span class="alert-icon">🔔</span>
+
+                        <div>
+                            <strong>Novo pedido</strong>
+                            <p>Pedido #1 foi registrado na Mesa 05.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="alert-item">
+                        <span class="alert-icon">✓</span>
+
+                        <div>
+                            <strong>Pedido pronto</strong>
+                            <p>Itens do Pedido #3 estão prontos.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MESAS -->
+        <section class="dashboard-bottom">
+
+            <div class="dashboard-panel tables-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Situação das mesas</h2>
+                        <p>Estado atual do salão</p>
+                    </div>
+
+                </div>
+
+                <div class="table-summary">
+
+                    <div class="table-status occupied">
+                        <strong>0</strong>
+                        <span>Ocupadas</span>
+                    </div>
+
+                    <div class="table-status free">
+                        <strong>0</strong>
+                        <span>Livres</span>
+                    </div>
+
+                    <div class="table-status reserved">
+                        <strong>0</strong>
+                        <span>Reservadas</span>
+                    </div>
+
+                    <div class="table-status unavailable">
+                        <strong>0</strong>
+                        <span>Indisponível</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-panel report-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>Relatórios</h2>
+                        <p>Consulte informações detalhadas</p>
+                    </div>
+
+                </div>
+
+                <button class="btn-primary report-button" id="btnRelatorios">
+                    VER RELATÓRIOS
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

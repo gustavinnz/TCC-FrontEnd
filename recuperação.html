@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recuperação de Senha - HawkCyber</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+            <div class="logo">
+                <h1>HawkCyber</h1>
+                <p>Recuperação de senha</p>
+            </div>
+
+
+            <form id="recuperacaoForm">
+
+                <div class="form-group">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
+
+                    <span class="error-message" id="emailError">
+                    </span>
+
+                </div>
+
+
+                <button type="submit" id="btnRecuperar" class="btn-primary">
+
+                    ENVIAR RECUPERAÇÃO
+
+                </button>
+
+
+                <a href="index.html" class="forgot-password">
+
+                    VOLTAR
+
+                </a>
+
+            </form>
+
+
+            <div id="message" class="message">
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/recuperacao.js"></script>
+
+</body>
+
+</html>

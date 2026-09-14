@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Funcionários - HawkCyber</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/funcionarios.css">
+</head>
+
+<body>
+
+    
+    <header class="topbar">
+
+        <div class="logo">
+            <span>HawkCyber</span>
+        </div>
+
+        <div class="topbar-right">
+
+            <span class="connection">
+                <span class="connection-dot"></span>
+                Conectado
+            </span>
+
+            <button class="notification-btn" title="Notificações">
+                🔔
+            </button>
+
+            <div class="user-info">
+                <strong>Administrador</strong>
+                <span>ADM</span>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- LATERAL -->
+    <aside class="sidebar">
+
+        <nav>
+
+            <a href="dashboard.html" class="menu-item">
+                <span>▣</span>
+                Dashboard
+            </a>
+
+            <a href="funcionarios.html" class="menu-item active">
+                <span>♙</span>
+                Funcionários
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>▤</span>
+                Categorias
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>🍔</span>
+                Produtos
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>▦</span>
+                Mesas
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>📦</span>
+                Estoque
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>💰</span>
+                Caixa
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>▥</span>
+                Relatórios
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="#" class="menu-item">
+                <span>⚙</span>
+                Configurações
+            </a>
+
+            <a href="#" class="menu-item">
+                <span>👤</span>
+                Meu perfil
+            </a>
+
+            <a href="index.html" class="menu-item logout">
+                <span>↪</span>
+                Sair
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    
+    <main class="main-content">
+
+        <div class="page-header">
+
+            <div>
+                <h1>Funcionários</h1>
+                <p>Gerencie os funcionários do estabelecimento</p>
+            </div>
+
+            <button class="btn-primary" id="btnNovoFuncionario">
+                + NOVO FUNCIONÁRIO
+            </button>
+
+        </div>
+
+
+        
+        <section class="filter-panel">
+
+            <div class="search-box">
+
+                <label for="busca">Buscar funcionário</label>
+
+                <input type="text" id="busca" placeholder="Digite o nome ou e-mail...">
+
+            </div>
+
+
+            <div class="filter-box">
+
+                <label for="perfil">Perfil</label>
+
+                <select id="perfil">
+
+                    <option value="todos">Todos</option>
+                    <option value="administrador">Administrador</option>
+                    <option value="garcom">Garçom</option>
+                    <option value="cozinha">Cozinha</option>
+                    <option value="caixa">Caixa</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter-box">
+
+                <label for="status">Status</label>
+
+                <select id="status">
+
+                    <option value="todos">Todos</option>
+                    <option value="ativo">Ativo</option>
+                    <option value="inativo">Inativo</option>
+
+                </select>
+
+            </div>
+
+
+            <button class="btn-secondary" id="btnFiltrar">
+                FILTRAR
+            </button>
+
+        </section>
+
+
+        <!-- Funcionários -->
+        <section class="table-panel">
+
+            <div class="table-header">
+
+                <div>
+                    <h2>Lista de funcionários</h2>
+                    <p>Funcionários cadastrados no sistema</p>
+                </div>
+
+                <span class="employee-count" id="employeeCount">
+                    4 funcionários
+                </span>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Função</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="tabelaFuncionarios">
+
+                        <tr>
+
+                            <td>
+                                <div class="employee-name">
+                                    <div class="avatar">AS</div>
+
+                                    <div>
+                                        <strong>Alexandre Silva</strong>
+                                        <small>ID: 001</small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>alexandre@hawkcyber.com</td>
+
+                            <td>
+                                <span class="profile-badge admin">
+                                    Administrador
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="status-badge active">
+                                    ATIVO
+                                </span>
+                            </td>
+
+                            <td>
+                                <div class="action-buttons">
+
+                                    <button class="action-btn edit" title="Editar" data-nome="Alexandre Silva">
+                                        ✎
+                                    </button>
+
+                                    <button class="action-btn delete" title="Excluir" data-nome="Alexandre Silva">
+                                        🗑
+                                    </button>
+
+                                </div>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <div class="employee-name">
+
+                                    <div class="avatar">GA</div>
+
+                                    <div>
+                                        <strong>Gustavo Araújo</strong>
+                                        <small>ID: 002</small>
+                                    </div>
+
+                                </div>
+                            </td>
+
+                            <td>gustavo@hawkcyber.com</td>
+
+                            <td>
+                                <span class="profile-badge waiter">
+                                    Garçom
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="status-badge active">
+                                    ATIVO
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button class="action-btn edit" title="Editar" data-nome="Gustavo Araújo">
+                                        ✎
+                                    </button>
+
+                                    <button class="action-btn delete" title="Excluir" data-nome="Gustavo Araújo">
+                                        🗑
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+
+                                <div class="employee-name">
+
+                                    <div class="avatar">MF</div>
+
+                                    <div>
+                                        <strong>Marlon Freitas</strong>
+                                        <small>ID: 003</small>
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>marlon@hawkcyber.com</td>
+
+                            <td>
+                                <span class="profile-badge kitchen">
+                                    Cozinha
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="status-badge active">
+                                    ATIVO
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button class="action-btn edit" title="Editar" data-nome="Marlon Freitas">
+                                        ✎
+                                    </button>
+
+                                    <button class="action-btn delete" title="Excluir" data-nome="Marlon Freitas">
+                                        🗑
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+
+                                <div class="employee-name">
+
+                                    <div class="avatar">LR</div>
+
+                                    <div>
+                                        <strong>Lucas Ribeiro</strong>
+                                        <small>ID: 004</small>
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>lucas@hawkcyber.com</td>
+
+                            <td>
+                                <span class="profile-badge cashier">
+                                    Caixa
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="status-badge active">
+                                    ATIVO
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button class="action-btn edit" title="Editar" data-nome="Lucas Ribeiro">
+                                        ✎
+                                    </button>
+
+                                    <button class="action-btn delete" title="Excluir" data-nome="Lucas Ribeiro">
+                                        🗑
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/funcionarios.js"></script>
+
+</body>
+
+</html>

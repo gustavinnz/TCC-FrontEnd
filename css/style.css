@@ -1,0 +1,322 @@
+/* ==============================
+   CORES DO SISTEMA
+   ============================== */
+
+:root {
+    --branco: #FFFFFF;
+
+    --marrom: #6B3E26;
+    --marrom-escuro: #4A2919;
+    --marrom-claro: #8B5A3C;
+
+    --laranja: #E67E22;
+    --laranja-claro: #F39C4A;
+
+    --cinza: #666666;
+    --cinza-claro: #E5E5E5;
+    --fundo: #F8F5F2;
+
+    --erro: #C0392B;
+    --sucesso: #27AE60;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+
+    background-color: var(--fundo);
+
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ==============================
+   CONTAINER DO LOGIN
+   ============================== */
+
+.login-container {
+    width: 100%;
+    padding: 20px;
+}
+
+
+/* ==============================
+   CARD DO LOGIN
+   ============================== */
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+
+    margin: auto;
+    padding: 35px;
+
+    background-color: var(--branco);
+
+    border-radius: 12px;
+
+    border-top: 5px solid var(--laranja);
+
+    box-shadow: 0 5px 20px rgba(107, 62, 38, 0.15);
+}
+
+
+/* ==============================
+   LOGO / NOME
+   ============================== */
+
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo h1 {
+    color: var(--marrom);
+
+    font-size: 30px;
+
+    margin-bottom: 5px;
+}
+
+.logo p {
+    color: var(--cinza);
+
+    font-size: 14px;
+}
+
+
+/* ==============================
+   CAMPOS
+   ============================== */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--marrom-escuro);
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+
+    padding: 12px;
+
+    background-color: var(--branco);
+
+    border: 1px solid var(--cinza-claro);
+    border-radius: 7px;
+
+    color: var(--marrom-escuro);
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+.form-group input::placeholder {
+    color: #999999;
+}
+
+.form-group input:focus {
+    border-color: var(--laranja);
+
+    box-shadow: 0 0 0 2px rgba(230, 126, 34, 0.15);
+}
+
+
+/* ==============================
+   SENHA
+   ============================== */
+
+.password-container {
+    position: relative;
+}
+
+.password-container input {
+    padding-right: 80px;
+}
+
+.toggle-password {
+    position: absolute;
+
+    right: 8px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: none;
+
+    color: var(--marrom);
+
+    cursor: pointer;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.toggle-password:hover {
+    color: var(--laranja);
+}
+
+
+/* ==============================
+   BOTÃO ENTRAR
+   ============================== */
+
+.btn-primary {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+    border-radius: 7px;
+
+    background-color: var(--marrom);
+
+    color: var(--branco);
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: var(--laranja);
+
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+    background-color: var(--marrom-claro);
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* ==============================
+   ESQUECI MINHA SENHA
+   ============================== */
+
+.forgot-password {
+    display: block;
+
+    margin-top: 18px;
+
+    text-align: center;
+
+    color: var(--marrom);
+
+    font-size: 13px;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.forgot-password:hover {
+    color: var(--laranja);
+
+    text-decoration: underline;
+}
+
+
+/* ==============================
+   MENSAGENS DE ERRO
+   ============================== */
+
+.error-message {
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--erro);
+
+    font-size: 12px;
+}
+
+
+/* ==============================
+   MENSAGENS GERAIS
+   ============================== */
+
+.message {
+    display: none;
+
+    margin-top: 20px;
+
+    padding: 10px;
+
+    border-radius: 6px;
+
+    text-align: center;
+
+    font-size: 13px;
+}
+
+.message.error {
+    display: block;
+
+    background-color: #FDECEC;
+
+    color: var(--erro);
+}
+
+.message.success {
+    display: block;
+
+    background-color: #EAF7EE;
+
+    color: var(--sucesso);
+}
+
+
+/* ==============================
+   RESPONSIVIDADE
+   ============================== */
+
+@media (max-width: 480px) {
+
+    .login-container {
+        padding: 15px;
+    }
+
+    .login-card {
+        padding: 25px 20px;
+    }
+
+    .logo h1 {
+        font-size: 26px;
+    }
+}

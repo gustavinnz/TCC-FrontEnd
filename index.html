@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Sistema de Restaurante</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+            <div class="logo">
+                <h1>HawkCyber</h1>
+                <p>Sistema de Restaurante</p>
+            </div>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label for="login">Login / E-mail</label>
+
+                    <input type="text" id="login" name="login" placeholder="Digite seu login ou e-mail">
+
+                    <span class="error-message" id="loginError"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+
+                    <div class="password-container">
+
+                        <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
+
+                        <button type="button" id="toggleSenha" class="toggle-password">
+                            Mostrar
+                        </button>
+
+                    </div>
+
+                    <span class="error-message" id="senhaError"></span>
+                </div>
+
+
+                <button type="submit" id="btnEntrar" class="btn-primary">
+                    ENTRAR
+                </button>
+
+
+                <a href="recuperação.html" id="esqueciSenha" class="forgot-password">
+                    ESQUECI MINHA SENHA
+                </a>
+
+            </form>
+
+            <div id="message" class="message"></div>
+
+        </section>
+
+    </main>
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
