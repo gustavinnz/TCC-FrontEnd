@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Categorias</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/categorias.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+</head>
+
+<body>
+
+    <!-- Topbar -->
+    <header class="topbar">
+
+        <div class="logo">
+            <a href="dashboard.html">
+                <img src="imgs/img_logo.png" alt="Logo HawkCyber">
+            </a>
+        </div>
+
+        <div class="topbar-right">
+
+            <div class="connection">
+                <span class="connection-dot"></span>
+                <span>Conectado</span>
+            </div>
+
+            <button class="notification-btn" title="Notificações">
+                🔔
+            </button>
+
+            <div class="user-info">
+                <strong>Usuário</strong>
+                <span>ADM</span>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <nav>
+
+            <a href="dashboard.html" class="menu-item">
+                <span>📊</span>
+                Dashboard
+            </a>
+
+            <a href="funcionarios.html" class="menu-item">
+                <span>👥</span>
+                Funcionários
+            </a>
+
+            <a href="categorias.html" class="menu-item active">
+                <span>📁</span>
+                Categorias
+            </a>
+
+            <a href="produtos.html" class="menu-item">
+                <span>🍔</span>
+                Produtos
+            </a>
+
+            <a href="mesas.html" class="menu-item">
+                <span>🪑</span>
+                Mesas
+            </a>
+
+            <a href="estoque.html" class="menu-item">
+                <span>📦</span>
+                Estoque
+            </a>
+
+            <a href="caixa.html" class="menu-item">
+                <span>💰</span>
+                Caixa
+            </a>
+
+            <a href="relatorios.html" class="menu-item">
+                <span>📈</span>
+                Relatórios
+            </a>
+
+            <a href="configuracoes.html" class="menu-item">
+                <span>⚙️</span>
+                Configurações
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="perfil.html" class="menu-item">
+                <span>👤</span>
+                Meu perfil
+            </a>
+
+            <a href="login.html" class="menu-item logout">
+                <span>🚪</span>
+                Sair
+            </a>
+
+        </div>
+
+    </aside>
+
+    <main class="main-content">
+
+        <div class="page-header">
+
+            <div>
+                <span class="breadcrumb">
+                    Administração / Categorias
+                </span>
+
+                <h1>Categorias</h1>
+
+                <p>
+                    Gerencie as categorias utilizadas no cardápio.
+                </p>
+            </div>
+
+            <a href="categoria-cadastro.html" class="btn-primary">
+                + NOVA CATEGORIA
+            </a>
+
+        </div>
+
+        <!-- Filtros -->
+        <section class="filters-card">
+
+            <div class="filter-group search-group">
+
+                <label for="busca">Buscar</label>
+
+                <input type="search" id="busca" placeholder="Buscar por nome...">
+
+            </div>
+
+            <div class="filter-group">
+
+                <label for="status">Status</label>
+
+                <select id="status">
+
+                    <option value="">
+                        Todos
+                    </option>
+
+                    <option value="Ativo">
+                        Ativo
+                    </option>
+
+                    <option value="Inativo">
+                        Inativo
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="filter-actions">
+
+                <button type="button" class="btn-secondary" id="btnFiltrar">
+                    FILTRAR
+                </button>
+
+                <button type="button" class="btn-secondary" id="btnLimpar">
+                    LIMPAR
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- Lista -->
+        <section class="table-card">
+
+            <div class="table-header">
+
+                <div>
+                    <h2>Lista de categorias</h2>
+
+                    <span id="contador">
+                        Carregando categorias...
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th>Ordem</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tabelaCategorias">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/categorias.js"></script>
+
+</body>
+
+</html>

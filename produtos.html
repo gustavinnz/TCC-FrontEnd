@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Produtos</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/produtos.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+</head>
+
+<body>
+
+    <!-- Topbar -->
+    <header class="topbar">
+
+        <div class="logo">
+            <a href="dashboard.html">
+                <img src="imgs/img_logo.png" alt="Logo HawkCyber">
+            </a>
+        </div>
+
+        <div class="topbar-right">
+
+            <div class="connection">
+                <span class="connection-dot"></span>
+                <span>Conectado</span>
+            </div>
+
+            <button class="notification-btn" title="Notificações">
+                🔔
+            </button>
+
+            <div class="user-info">
+                <strong>Usuário</strong>
+                <span>ADM</span>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Menu lateral -->
+    <aside class="sidebar">
+
+        <nav>
+
+            <a href="dashboard.html" class="menu-item">
+                <span>📊</span>
+                Dashboard
+            </a>
+
+            <a href="funcionarios.html" class="menu-item">
+                <span>👥</span>
+                Funcionários
+            </a>
+
+            <a href="categorias.html" class="menu-item">
+                <span>📁</span>
+                Categorias
+            </a>
+
+            <a href="produtos.html" class="menu-item active">
+                <span>🍔</span>
+                Produtos
+            </a>
+
+            <a href="mesas.html" class="menu-item">
+                <span>🪑</span>
+                Mesas
+            </a>
+
+            <a href="estoque.html" class="menu-item">
+                <span>📦</span>
+                Estoque
+            </a>
+
+            <a href="caixa.html" class="menu-item">
+                <span>💰</span>
+                Caixa
+            </a>
+
+            <a href="relatorios.html" class="menu-item">
+                <span>📈</span>
+                Relatórios
+            </a>
+
+            <a href="configuracoes.html" class="menu-item">
+                <span>⚙️</span>
+                Configurações
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="perfil.html" class="menu-item">
+                <span>👤</span>
+                Meu perfil
+            </a>
+
+            <a href="login.html" class="menu-item logout">
+                <span>🚪</span>
+                Sair
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- Conteúdo -->
+    <main class="main-content">
+
+        <div class="page-header">
+
+            <div>
+                <h1>Produtos</h1>
+                <p>Gerencie os produtos disponíveis no estabelecimento.</p>
+            </div>
+
+            <a href="produto-cadastro.html" class="btn-novo">
+                + Novo produto
+            </a>
+
+        </div>
+
+        <!-- Filtros -->
+        <section class="filtros">
+
+            <div class="campo-filtro busca">
+
+                <label for="busca">Pesquisar</label>
+
+                <input type="search" id="busca" placeholder="Nome do produto...">
+
+            </div>
+
+            <div class="campo-filtro">
+
+                <label for="categoria">Categoria</label>
+
+                <select id="categoria">
+
+                    <option value="">Todas as categorias</option>
+
+                </select>
+
+            </div>
+
+            <div class="campo-filtro">
+
+                <label for="setor">Setor</label>
+
+                <select id="setor">
+
+                    <option value="">Todos os setores</option>
+                    <option value="SALÃO">Salão</option>
+                    <option value="COZINHA">Cozinha</option>
+
+                </select>
+
+            </div>
+
+            <div class="campo-filtro">
+
+                <label for="status">Status</label>
+
+                <select id="status">
+
+                    <option value="">Todos</option>
+                    <option value="Ativo">Ativo</option>
+                    <option value="Inativo">Inativo</option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+        <!-- Tabela -->
+        <section class="tabela-container">
+
+            <div class="tabela-header">
+
+                <h2>Lista de produtos</h2>
+
+                <span id="contador">
+                    0 produtos
+                </span>
+
+            </div>
+
+            <div class="tabela-scroll">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Produto</th>
+                            <th>Categoria</th>
+                            <th>Preço</th>
+                            <th>Setor</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tabelaProdutos">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div id="estadoVazio" class="estado-vazio">
+
+                <span>🍔</span>
+
+                <h3>Nenhum produto encontrado</h3>
+
+                <p>
+                    Cadastre um produto ou altere os filtros da pesquisa.
+                </p>
+
+            </div>
+
+            <div id="estadoCarregando" class="estado-carregando">
+
+                Carregando produtos...
+
+            </div>
+
+            <div id="mensagem" class="mensagem"></div>
+
+        </section>
+
+    </main>
+
+    <script src="js/produtos.js"></script>
+
+</body>
+
+</html>

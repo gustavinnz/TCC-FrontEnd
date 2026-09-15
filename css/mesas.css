@@ -1,0 +1,240 @@
+/* Conteúdo */
+
+.main-content {
+    margin-left: 230px;
+    padding: 100px 30px 40px;
+    min-height: 100vh;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    font-size: 28px;
+    color: var(--marrom-escuro);
+    margin-bottom: 5px;
+}
+
+.page-header p {
+    color: var(--cinza);
+    font-size: 14px;
+}
+
+
+/* Botões */
+
+.btn-primary,
+.btn-secondary,
+.action-btn {
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background-color: var(--marrom);
+    color: var(--branco);
+    padding: 11px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: var(--laranja);
+}
+
+.btn-secondary {
+    background-color: var(--branco);
+    color: var(--marrom);
+    border: 1px solid var(--cinza-claro);
+    padding: 11px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.btn-secondary:hover {
+    background-color: var(--fundo);
+}
+
+
+/* Filtros */
+
+.filters {
+    background-color: var(--branco);
+    border: 1px solid var(--cinza-claro);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: end;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 250px;
+}
+
+.filter-group label {
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--marrom-escuro);
+}
+
+.filter-group input,
+.filter-group select {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--cinza-claro);
+    border-radius: 6px;
+    outline: none;
+    font-family: inherit;
+    background-color: var(--branco);
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    border-color: var(--laranja);
+}
+
+
+/* Informações */
+
+.table-info {
+    margin-bottom: 15px;
+    color: var(--cinza);
+    font-size: 13px;
+}
+
+
+/* Grid */
+
+.mesas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+
+/* Card da mesa */
+
+.mesa-card {
+    background-color: var(--branco);
+    border: 1px solid var(--cinza-claro);
+    border-radius: 10px;
+    padding: 20px;
+    transition: 0.2s;
+}
+
+.mesa-card:hover {
+    border-color: var(--laranja);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.mesa-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.mesa-numero {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--marrom-escuro);
+}
+
+.status {
+    padding: 5px 9px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.status-livre {
+    background-color: #E8F5E9;
+    color: #218838;
+}
+
+.status-ocupada {
+    background-color: #FDECEC;
+    color: var(--erro);
+}
+
+.status-reservada {
+    background-color: #FFF3E0;
+    color: #C56A00;
+}
+
+.status-indisponivel {
+    background-color: #EEEEEE;
+    color: #555555;
+}
+
+.mesa-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--cinza);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.mesa-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.action-btn {
+    padding: 9px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: center;
+    background-color: var(--fundo);
+    color: var(--marrom);
+    border: 1px solid var(--cinza-claro);
+}
+
+.action-btn:hover {
+    background-color: var(--marrom);
+    color: var(--branco);
+}
+
+.action-btn.qr {
+    background-color: var(--laranja);
+    color: var(--branco);
+    border-color: var(--laranja);
+}
+
+.action-btn.qr:hover {
+    background-color: var(--marrom);
+    border-color: var(--marrom);
+}
+
+.action-btn.status-btn {
+    grid-column: span 2;
+}
+
+
+/* Estado vazio */
+
+.empty-message {
+    grid-column: 1 / -1;
+    background-color: var(--branco);
+    border: 1px solid var(--cinza-claro);
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    color: var(--cinza);
+}

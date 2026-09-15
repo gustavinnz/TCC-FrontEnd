@@ -1,61 +1,121 @@
-const btnNovoFuncionario = document.getElementById("btnNovoFuncionario");
-const btnFiltrar = document.getElementById("btnFiltrar");
 const busca = document.getElementById("busca");
+const perfil = document.getElementById("perfil");
+const status = document.getElementById("status");
+const btnFiltrar = document.getElementById("btnFiltrar");
+
+const tabela = document.getElementById("tabelaFuncionarios");
+const contador = document.getElementById("contador");
 
 
-// NOVO FUNCIONÁRIO
-btnNovoFuncionario.addEventListener("click", function () {
-    window.location.href = "funcionario-cadastro.html";
-});
+function filtrarFuncionarios() {
+
+    const textoBusca =
+        busca.value.toLowerCase().trim();
+
+    const perfilSelecionado =
+        perfil.value.toLowerCase();
+
+    const statusSelecionado =
+        status.value.toLowerCase();
+
+    const linhas =
+        tabela.querySelectorAll("tr");
+
+    let quantidade = 0;
 
 
-// FILTRAR
-btnFiltrar.addEventListener("click", function () {
+    linhas.forEach(linha => {
 
-    const textoBusca = busca.value.trim();
+        const texto =
+            linha.textContent.toLowerCase();
 
-    if (textoBusca === "") {
-        alert("Informe um nome ou e-mail para realizar a busca.");
-        return;
-    }
+        const perfilFuncionario =
+            linha.children[2].textContent.toLowerCase();
 
-    alert("Busca realizada por: " + textoBusca);
-
-});
+        const statusFuncionario =
+            linha.children[3].textContent.toLowerCase();
 
 
-// EDITAR FUNCIONÁRIO
-const botoesEditar = document.querySelectorAll(".action-btn.edit");
+        const correspondeBusca =
+            texto.includes(textoBusca);
 
-botoesEditar.forEach(function (botao) {
+        const correspondePerfil =
+            !perfilSelecionado ||
+            perfilFuncionario.includes(perfilSelecionado);
 
-    botao.addEventListener("click", function () {
+        const correspondeStatus =
+            !statusSelecionado ||
+            statusFuncionario.includes(statusSelecionado);
 
-        const nome = botao.getAttribute("data-nome");
 
-        alert("Editar funcionário: " + nome);
+        if (
+            correspondeBusca &&
+            correspondePerfil &&
+            correspondeStatus
+        ) {
+
+            linha.style.display = "";
+
+            quantidade++;
+
+        } else {
+
+            linha.style.display = "none";
+
+        }
 
     });
 
-});
+
+    contador.textContent =
+        `${quantidade} funcionário${quantidade !== 1 ? "s" : ""} encontrado${quantidade !== 1 ? "s" : ""}`;
+
+}
 
 
-// EXCLUIR FUNCIONÁRIO
-const botoesExcluir = document.querySelectorAll(".action-btn.delete");
+btnFiltrar.addEventListener(
+    "click",
+    filtrarFuncionarios
+);
 
-botoesExcluir.forEach(function (botao) {
 
-    botao.addEventListener("click", function () {
+busca.addEventListener(
+    "input",
+    filtrarFuncionarios
+);
 
-        const nome = botao.getAttribute("data-nome");
 
-        const confirmar = confirm(
-            "Deseja realmente excluir o funcionário " + nome + "?"
-        );
+/* ==================== EXCLUIR ==================== */
+
+const botoesExcluir =
+    document.querySelectorAll(".action-btn.delete");
+
+
+botoesExcluir.forEach(botao => {
+
+    botao.addEventListener("click", () => {
+
+        const nome =
+            botao.dataset.nome;
+
+        const confirmar =
+            confirm(
+                `Deseja realmente excluir o funcionário ${nome}?`
+            );
+
 
         if (confirmar) {
 
-            alert("Funcionário excluído temporariamente.");
+            const linha =
+                botao.closest("tr");
+
+            linha.remove();
+
+            filtrarFuncionarios();
+
+            alert(
+                "Funcionário excluído com sucesso!"
+            );
 
         }
 

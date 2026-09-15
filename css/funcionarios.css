@@ -1,16 +1,265 @@
-/* ================================
-   FUNCIONÁRIOS 
-================================ */
+/* ==================== HEADER ==================== */
+
+.topbar {
+    height: 70px;
+    width: 100%;
+
+    background-color: var(--branco);
+
+    border-bottom: 1px solid var(--cinza-claro);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 30px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 1000;
+}
+
+
+/* ==================== LOGO ==================== */
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+
+/* ==================== TOPO DIREITO ==================== */
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.connection {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: var(--cinza);
+
+    font-size: 14px;
+}
+
+.connection-dot {
+    width: 9px;
+    height: 9px;
+
+    background-color: var(--sucesso);
+
+    border-radius: 50%;
+}
+
+.notification-btn {
+    border: none;
+
+    background: transparent;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+
+    text-align: right;
+}
+
+.user-info strong {
+    font-size: 14px;
+}
+
+.user-info span {
+    font-size: 12px;
+
+    color: var(--cinza);
+}
+
+
+/* ==================== SIDEBAR ==================== */
+
+.sidebar {
+    position: fixed;
+
+    top: 70px;
+    left: 0;
+
+    width: 230px;
+    height: calc(100vh - 70px);
+
+    background-color: var(--marrom-escuro);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 20px 12px;
+
+    z-index: 900;
+}
+
+.sidebar nav,
+.sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 15px;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.menu-item:hover {
+    background-color: var(--marrom);
+}
+
+.menu-item.active {
+    background-color: var(--laranja);
+}
+
+.menu-item span {
+    width: 22px;
+
+    text-align: center;
+}
+
+.menu-item.logout:hover {
+    background-color: var(--erro);
+}
+
+
+/* CONTEÚDO */
+
+.main-content {
+    margin-left: 230px;
+
+    padding: 100px 35px 40px;
+
+    min-height: calc(100vh - 70px);
+}
+
+
+/* CABEÇALHO */
+
+.page-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    margin: 0 0 5px;
+
+    font-size: 28px;
+}
+
+.page-header p {
+    margin: 0;
+
+    color: var(--cinza);
+}
+
+
+/* BOTÕES */
+
+.btn-primary,
+.btn-secondary {
+    border: none;
+
+    margin-right: 1rem;
+
+    padding: 11px 17px;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--marrom);
+
+    color: var(--branco);
+}
+
+.btn-primary:hover {
+    background-color: var(--laranja);
+}
+
+.btn-secondary {
+    background-color: var(--cinza-claro);
+
+    color: var(--marrom-escuro);
+}
+
+.btn-secondary:hover {
+    background-color: #d5d5d5;
+}
+
+
+/* ==================== FILTROS ==================== */
 
 .filter-panel {
     background-color: var(--branco);
+
     border: 1px solid var(--cinza-claro);
+
     border-radius: 10px;
 
     padding: 20px;
 
     display: grid;
+
     grid-template-columns: 2fr 1fr 1fr auto;
+
     gap: 15px;
 
     align-items: end;
@@ -19,302 +268,215 @@
 }
 
 .search-box,
-.filter-box {
+.filter-group {
     display: flex;
+
     flex-direction: column;
+
     gap: 7px;
 }
 
 .search-box label,
-.filter-box label {
-    font-size: 12px;
-    font-weight: bold;
+.filter-group label {
     color: var(--marrom-escuro);
+
+    font-size: 12px;
+
+    font-weight: bold;
 }
 
 .search-box input,
-.filter-box select {
-    height: 42px;
+.filter-group select {
+    width: 100%;
+
+    height: 40px;
 
     padding: 0 12px;
 
     border: 1px solid var(--cinza-claro);
+
     border-radius: 6px;
+
+    outline: none;
 
     background-color: var(--branco);
 
-    outline: none;
+    color: var(--marrom-escuro);
 
     font-size: 13px;
 }
 
 .search-box input:focus,
-.filter-box select:focus {
+.filter-group select:focus {
     border-color: var(--laranja);
 }
 
 
-/* ================================
-   TABELA
-================================ */
+/* ==================== PAINEL ==================== */
 
-.table-panel {
+.employees-panel {
     background-color: var(--branco);
 
     border: 1px solid var(--cinza-claro);
+
     border-radius: 10px;
 
     padding: 22px;
 }
 
-.table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
+.panel-header {
     margin-bottom: 20px;
 }
 
-.table-header h2 {
-    margin: 0;
+.panel-header h2 {
+    margin: 0 0 5px;
 
     font-size: 18px;
-    color: var(--marrom-escuro);
 }
 
-.table-header p {
-    margin: 5px 0 0;
+.panel-header p {
+    margin: 0;
 
     color: var(--cinza);
-    font-size: 12px;
-}
 
-.employee-count {
-    padding: 7px 12px;
-
-    border-radius: 5px;
-
-    background-color: var(--fundo);
-
-    color: var(--marrom);
-
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 13px;
 }
 
 
-/* ================================
-   TABELA
-================================ */
+/* ==================== TABELA ==================== */
 
 .table-container {
     width: 100%;
+
     overflow-x: auto;
 }
 
 table {
     width: 100%;
+
     border-collapse: collapse;
 }
 
-thead {
-    background-color: var(--fundo);
-}
-
-th {
-    padding: 14px;
+th,
+td {
+    padding: 14px 10px;
 
     text-align: left;
-
-    font-size: 12px;
-    color: var(--marrom-escuro);
-
-    white-space: nowrap;
-}
-
-td {
-    padding: 14px;
 
     border-bottom: 1px solid var(--cinza-claro);
 
     font-size: 13px;
+}
 
+th {
     color: var(--cinza);
-}
 
-tbody tr:hover {
-    background-color: #fcfaf8;
-}
+    font-size: 12px;
 
-
-/* ================================
-   FUNCIONÁRIO
-================================ */
-
-.employee-name {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    min-width: 190px;
-}
-
-.avatar {
-    width: 38px;
-    height: 38px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background-color: var(--marrom);
-
-    color: var(--branco);
-
-    font-size: 11px;
     font-weight: bold;
 }
 
-.employee-name div:last-child {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.employee-name strong {
+td strong {
     color: var(--marrom-escuro);
-    font-size: 13px;
-}
-
-.employee-name small {
-    color: var(--cinza);
-    font-size: 10px;
 }
 
 
-/* ================================
-   PERFIS
-================================ */
+/* ==================== STATUS ==================== */
 
-.profile-badge,
-.status-badge {
+.status {
     display: inline-block;
 
-    padding: 6px 9px;
+    padding: 5px 10px;
 
-    border-radius: 5px;
+    border-radius: 20px;
 
-    font-size: 10px;
+    font-size: 11px;
+
     font-weight: bold;
-
-    white-space: nowrap;
 }
 
-.profile-badge.admin {
-    background-color: #f0e5de;
-    color: var(--marrom);
-}
+.status-active {
+    background-color: #dff4e6;
 
-.profile-badge.waiter {
-    background-color: #fff0dd;
-    color: var(--laranja);
-}
-
-.profile-badge.kitchen {
-    background-color: #f3e9e1;
-    color: var(--marrom-claro);
-}
-
-.profile-badge.cashier {
-    background-color: #eee;
-    color: var(--cinza);
-}
-
-
-/* ================================
-   STATUS
-================================ */
-
-.status-badge.active {
-    background-color: #e5f5ea;
     color: var(--sucesso);
 }
 
-.status-badge.inactive {
-    background-color: #f5e5e3;
-    color: var(--erro);
+.status-inactive {
+    background-color: #eeeeee;
+
+    color: var(--cinza);
 }
 
 
-/* ================================
-   AÇÕES
-================================ */
+/* ==================== AÇÕES ==================== */
 
-.action-buttons {
+.actions {
     display: flex;
-    gap: 7px;
+
+    align-items: center;
+
+    gap: 8px;
 }
 
 .action-btn {
-    width: 34px;
-    height: 34px;
+    border: none;
+
+    padding: 7px 10px;
 
     border-radius: 5px;
 
+    font-size: 11px;
+
+    font-weight: bold;
+
     cursor: pointer;
 
-    background-color: var(--branco);
-
-    transition: 0.2s;
+    text-decoration: none;
 }
 
 .action-btn.edit {
-    border: 1px solid var(--marrom);
+    background-color: var(--fundo);
 
     color: var(--marrom);
 }
 
 .action-btn.edit:hover {
-    background-color: var(--marrom);
+    background-color: var(--laranja-claro);
+
     color: var(--branco);
 }
 
 .action-btn.delete {
-    border: 1px solid var(--erro);
+    background-color: #f9e1df;
 
     color: var(--erro);
 }
 
 .action-btn.delete:hover {
     background-color: var(--erro);
+
     color: var(--branco);
 }
 
 
-/* ================================
-   RESPONSIVIDADE
-================================ */
+/* ==================== FOOTER ==================== */
 
-@media (max-width: 900px) {
+.footer {
+    margin-left: 230px;
 
-    .filter-panel {
-        grid-template-columns: 1fr 1fr;
-    }
+    padding: 20px 35px;
 
+    background-color: var(--branco);
+
+    border-top: 1px solid var(--cinza-claro);
+
+    text-align: center;
 }
 
-@media (max-width: 550px) {
+.footer p {
+    margin: 0;
 
-    .filter-panel {
-        grid-template-columns: 1fr;
-    }
+    color: var(--cinza);
 
-    .table-header {
-        align-items: flex-start;
-        gap: 10px;
-        flex-direction: column;
-    }
-
+    font-size: 13px;
 }

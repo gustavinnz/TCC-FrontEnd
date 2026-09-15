@@ -1,209 +1,130 @@
+const API_URL = "http://localhost:8080/api/funcionarios";
+
 const form = document.getElementById("formFuncionario");
+const tituloPagina = document.getElementById("tituloPagina");
+
+const nome = document.getElementById("nome");
+const email = document.getElementById("email");
+const senha = document.getElementById("senha");
+const perfil = document.getElementById("perfil");
+const status = document.getElementById("status");
 
 const btnSalvar = document.getElementById("btnSalvar");
 const btnCancelar = document.getElementById("btnCancelar");
+const btnLimpar = document.getElementById("btnLimpar");
+const btnMostrarSenha = document.getElementById("btnMostrarSenha");
 
-const tituloPagina = document.getElementById("tituloPagina");
+const mensagem = document.getElementById("mensagem");
 
-const toast = document.getElementById("toast");
+const id = new URLSearchParams(window.location.search).get("id");
 
-
-// =====================================================
-// MODO DA TELA
-// =====================================================
-
-// Futuramente o ID poderá vir da URL:
-// funcionario-cadastro.html?id=15
-
-const parametros = new URLSearchParams(window.location.search);
-const idFuncionario = parametros.get("id");
+let modoEdicao = Boolean(id);
 
 
-// Se existir ID, a tela funciona como edição
-if (idFuncionario) {
+/* Carrega os dados para edição */
 
-    tituloPagina.textContent = "Editar Funcionário";
+async function carregarFuncionario() {
 
-    carregarFuncionario(idFuncionario);
-}
-
-
-// =====================================================
-// CARREGAR FUNCIONÁRIO
-// =====================================================
-
-async function carregarFuncionario(id) {
-
-    try {
-
-        // FUTURO BACKEND:
-        // const resposta = await fetch(`/api/funcionarios/${id}`);
-        // const funcionario = await resposta.json();
-
-        // Exemplo temporário
-        const funcionario = {
-            nome: "João da Silva",
-            cpf: "123.456.789-00",
-            email: "joao@email.com",
-            telefone: "(16) 99999-9999",
-            perfil: "garcom",
-            status: "ativo"
-        };
-
-        document.getElementById("nome").value = funcionario.nome;
-        document.getElementById("cpf").value = funcionario.cpf;
-        document.getElementById("email").value = funcionario.email;
-        document.getElementById("telefone").value = funcionario.telefone;
-        document.getElementById("perfil").value = funcionario.perfil;
-        document.getElementById("status").value = funcionario.status;
-
-        // Na edição, senha pode ser preenchida somente
-        // caso o backend exija uma nova senha.
-        document.getElementById("senha").required = false;
-        document.getElementById("confirmarSenha").required = false;
-
-    } catch (erro) {
-
-        mostrarToast("Não foi possível carregar o funcionário.");
-
-        console.error(erro);
-    }
-}
-
-
-// =====================================================
-// ENVIO DO FORMULÁRIO
-// =====================================================
-
-form.addEventListener("submit", async function (event) {
-
-    event.preventDefault();
-
-    limparErros();
-
-    if (!validarFormulario()) {
+    if (!modoEdicao) {
         return;
     }
 
-    btnSalvar.disabled = true;
-    btnSalvar.textContent = "SALVANDO...";
+    tituloPagina.textContent = "Editar Funcionário";
 
+    document.getElementById("asteriscoSenha").textContent = "";
 
-    const dadosFuncionario = {
+    document.getElementById("ajudaSenha").textContent =
+        "Deixe vazio para manter a senha atual.";
 
-        nome: document.getElementById("nome").value.trim(),
-
-        cpf: document.getElementById("cpf").value.trim(),
-
-        email: document.getElementById("email").value.trim(),
-
-        telefone: document.getElementById("telefone").value.trim(),
-
-        perfil: document.getElementById("perfil").value,
-
-        status: document.getElementById("status").value,
-
-        senha: document.getElementById("senha").value
-    };
-
+    senha.removeAttribute("required");
 
     try {
 
-        /*
-        =================================================
-        FUTURO BACKEND
-        =================================================
+        btnSalvar.disabled = true;
+        btnSalvar.textContent = "CARREGANDO...";
 
-        const url = idFuncionario
-            ? `/api/funcionarios/${idFuncionario}`
-            : `/api/funcionarios`;
-
-        const metodo = idFuncionario ? "PUT" : "POST";
-
-        const resposta = await fetch(url, {
-            method: metodo,
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(dadosFuncionario)
-        });
+        const resposta = await fetch(`${API_URL}/${id}`);
 
         if (!resposta.ok) {
-            throw new Error("Erro ao salvar funcionário.");
+            throw new Error("Funcionário não encontrado.");
         }
 
         const funcionario = await resposta.json();
 
-        =================================================
-        */
-
-
-        // Simulação temporária
-        await new Promise(resolve => setTimeout(resolve, 800));
-
-
-        if (idFuncionario) {
-            mostrarToast("Funcionário atualizado com sucesso!");
-        } else {
-            mostrarToast("Funcionário cadastrado com sucesso!");
-        }
-
-
-        setTimeout(() => {
-            window.location.href = "funcionarios.html";
-        }, 1200);
-
+        nome.value = funcionario.nome || "";
+        email.value = funcionario.email || "";
+        perfil.value = funcionario.perfil || "";
+        status.value = funcionario.status || "Ativo";
 
     } catch (erro) {
 
+        mostrarMensagem(
+            "Não foi possível carregar os dados do funcionário.",
+            "error"
+        );
+
         console.error(erro);
 
-        mostrarToast("Não foi possível salvar o funcionário.");
+    } finally {
 
         btnSalvar.disabled = false;
         btnSalvar.textContent = "SALVAR";
     }
+}
+
+
+/* Mostra ou esconde a senha */
+
+btnMostrarSenha.addEventListener("click", () => {
+
+    if (senha.type === "password") {
+
+        senha.type = "text";
+        btnMostrarSenha.textContent = "Ocultar";
+
+    } else {
+
+        senha.type = "password";
+        btnMostrarSenha.textContent = "Mostrar";
+    }
 });
 
 
-// =====================================================
-// VALIDAÇÃO
-// =====================================================
+/* Limpa os erros */
+
+function limparErros() {
+
+    document.getElementById("erroNome").textContent = "";
+    document.getElementById("erroEmail").textContent = "";
+    document.getElementById("erroSenha").textContent = "";
+    document.getElementById("erroPerfil").textContent = "";
+}
+
+
+/* Validação */
 
 function validarFormulario() {
 
+    limparErros();
+
     let valido = true;
 
-
-    const nome = document.getElementById("nome").value.trim();
-    const cpf = document.getElementById("cpf").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const perfil = document.getElementById("perfil").value;
-
-    const senha = document.getElementById("senha").value;
-    const confirmarSenha =
-        document.getElementById("confirmarSenha").value;
-
-
-    if (nome.length < 3) {
+    if (nome.value.trim() === "") {
 
         document.getElementById("erroNome").textContent =
-            "Informe o nome completo.";
+            "Informe o nome do funcionário.";
 
         valido = false;
     }
 
+    if (email.value.trim() === "") {
 
-    if (cpf.length !== 14) {
-
-        document.getElementById("erroCpf").textContent =
-            "Informe um CPF válido.";
+        document.getElementById("erroEmail").textContent =
+            "Informe o login/e-mail.";
 
         valido = false;
-    }
 
-
-    if (!emailValido(email)) {
+    } else if (!email.validity.valid) {
 
         document.getElementById("erroEmail").textContent =
             "Informe um e-mail válido.";
@@ -211,19 +132,7 @@ function validarFormulario() {
         valido = false;
     }
 
-
-    if (!perfil) {
-
-        document.getElementById("erroPerfil").textContent =
-            "Selecione um perfil.";
-
-        valido = false;
-    }
-
-
-    // Na criação, senha é obrigatória.
-    // Na edição, só é validada se o usuário preencher.
-    if (!idFuncionario && senha.length < 6) {
+    if (!modoEdicao && senha.value.length < 6) {
 
         document.getElementById("erroSenha").textContent =
             "A senha deve possuir pelo menos 6 caracteres.";
@@ -231,134 +140,142 @@ function validarFormulario() {
         valido = false;
     }
 
+    if (modoEdicao && senha.value.length > 0 && senha.value.length < 6) {
 
-    if (senha || confirmarSenha) {
+        document.getElementById("erroSenha").textContent =
+            "A senha deve possuir pelo menos 6 caracteres.";
 
-        if (senha !== confirmarSenha) {
-
-            document.getElementById("erroConfirmarSenha").textContent =
-                "As senhas não coincidem.";
-
-            valido = false;
-        }
+        valido = false;
     }
 
+    if (perfil.value === "") {
+
+        document.getElementById("erroPerfil").textContent =
+            "Selecione um perfil.";
+
+        valido = false;
+    }
 
     return valido;
 }
 
 
-// =====================================================
-// VALIDAÇÃO DE E-MAIL
-// =====================================================
+/* Salva o funcionário */
 
-function emailValido(email) {
+form.addEventListener("submit", async (event) => {
 
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
+    event.preventDefault();
 
-
-// =====================================================
-// CPF
-// =====================================================
-
-document.getElementById("cpf").addEventListener("input", function () {
-
-    let valor = this.value.replace(/\D/g, "");
-
-    valor = valor.substring(0, 11);
-
-    valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
-    valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
-    valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-
-    this.value = valor;
-});
-
-
-// =====================================================
-// TELEFONE
-// =====================================================
-
-document.getElementById("telefone").addEventListener("input", function () {
-
-    let valor = this.value.replace(/\D/g, "");
-
-    valor = valor.substring(0, 11);
-
-    if (valor.length <= 10) {
-
-        valor = valor.replace(/(\d{2})(\d)/, "($1) $2");
-        valor = valor.replace(/(\d{4})(\d)/, "$1-$2");
-
-    } else {
-
-        valor = valor.replace(/(\d{2})(\d)/, "($1) $2");
-        valor = valor.replace(/(\d{5})(\d)/, "$1-$2");
+    if (!validarFormulario()) {
+        return;
     }
 
-    this.value = valor;
-});
+    const funcionario = {
+        nome: nome.value.trim(),
+        email: email.value.trim(),
+        perfil: perfil.value,
+        status: status.value
+    };
 
+    if (senha.value.trim() !== "") {
+        funcionario.senha = senha.value;
+    }
 
-// =====================================================
-// MOSTRAR / OCULTAR SENHA
-// =====================================================
+    try {
 
-document.querySelectorAll(".mostrar-senha").forEach(botao => {
+        btnSalvar.disabled = true;
+        btnSalvar.textContent = "SALVANDO...";
 
-    botao.addEventListener("click", function () {
+        const resposta = await fetch(
+            modoEdicao ? `${API_URL}/${id}` : API_URL,
+            {
+                method: modoEdicao ? "PUT" : "POST",
 
-        const input = document.getElementById(this.dataset.target);
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-        if (input.type === "password") {
+                body: JSON.stringify(funcionario)
+            }
+        );
 
-            input.type = "text";
-            this.textContent = "🙈";
+        const dados = await resposta.json().catch(() => null);
 
-        } else {
+        if (!resposta.ok) {
 
-            input.type = "password";
-            this.textContent = "👁";
+            const erroBackend =
+                dados?.message ||
+                dados?.erro ||
+                "Não foi possível salvar o funcionário.";
+
+            throw new Error(erroBackend);
         }
-    });
+
+        mostrarMensagem(
+            modoEdicao
+                ? "Funcionário atualizado com sucesso!"
+                : "Funcionário cadastrado com sucesso!",
+            "success"
+        );
+
+        setTimeout(() => {
+            window.location.href = "funcionarios.html";
+        }, 1200);
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        mostrarMensagem(
+            erro.message,
+            "error"
+        );
+
+    } finally {
+
+        btnSalvar.disabled = false;
+        btnSalvar.textContent = "SALVAR";
+    }
 });
 
 
-// =====================================================
-// CANCELAR
-// =====================================================
+/* Limpar formulário */
 
-btnCancelar.addEventListener("click", function () {
+btnLimpar.addEventListener("click", () => {
+
+    form.reset();
+
+    limparErros();
+
+    status.value = "Ativo";
+
+    if (modoEdicao) {
+        senha.value = "";
+    }
+
+    mensagem.className = "message";
+    mensagem.textContent = "";
+});
+
+
+/* Voltar para a lista */
+
+btnCancelar.addEventListener("click", () => {
 
     window.location.href = "funcionarios.html";
 });
 
 
-// =====================================================
-// ERROS
-// =====================================================
+/* Exibe mensagens */
 
-function limparErros() {
+function mostrarMensagem(texto, tipo) {
 
-    document.querySelectorAll(".erro").forEach(erro => {
-        erro.textContent = "";
-    });
+    mensagem.textContent = texto;
+
+    mensagem.className = `message ${tipo}`;
 }
 
 
-// =====================================================
-// TOAST
-// =====================================================
+/* Inicia a página */
 
-function mostrarToast(mensagem) {
-
-    toast.textContent = mensagem;
-    toast.style.display = "block";
-
-    setTimeout(() => {
-
-        toast.style.display = "none";
-
-    }, 3000);
-}
+carregarFuncionario();

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Produto</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/produto-cadastro.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+</head>
+
+<body>
+
+    <!-- Topbar -->
+    <header class="topbar">
+
+        <div class="logo">
+            <a href="dashboard.html">
+                <img src="imgs/img_logo.png" alt="Logo HawkCyber">
+            </a>
+        </div>
+
+        <div class="topbar-right">
+
+            <div class="connection">
+                <span class="connection-dot"></span>
+                <span>Conectado</span>
+            </div>
+
+            <button class="notification-btn" title="Notificações">
+                🔔
+            </button>
+
+            <div class="user-info">
+                <strong>Usuário</strong>
+                <span>ADM</span>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Menu lateral -->
+    <aside class="sidebar">
+
+        <nav>
+
+            <a href="dashboard.html" class="menu-item">
+                <span>📊</span>
+                Dashboard
+            </a>
+
+            <a href="funcionarios.html" class="menu-item">
+                <span>👥</span>
+                Funcionários
+            </a>
+
+            <a href="categorias.html" class="menu-item">
+                <span>📁</span>
+                Categorias
+            </a>
+
+            <a href="produtos.html" class="menu-item active">
+                <span>🍔</span>
+                Produtos
+            </a>
+
+            <a href="mesas.html" class="menu-item">
+                <span>🪑</span>
+                Mesas
+            </a>
+
+            <a href="estoque.html" class="menu-item">
+                <span>📦</span>
+                Estoque
+            </a>
+
+            <a href="caixa.html" class="menu-item">
+                <span>💰</span>
+                Caixa
+            </a>
+
+            <a href="relatorios.html" class="menu-item">
+                <span>📈</span>
+                Relatórios
+            </a>
+
+            <a href="configuracoes.html" class="menu-item">
+                <span>⚙️</span>
+                Configurações
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="perfil.html" class="menu-item">
+                <span>👤</span>
+                Meu perfil
+            </a>
+
+            <a href="login.html" class="menu-item logout">
+                <span>🚪</span>
+                Sair
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- Conteúdo -->
+    <main class="main-content">
+
+        <div class="page-header">
+
+            <div>
+                <h1 id="tituloPagina">Novo produto</h1>
+                <p id="subtituloPagina">
+                    Cadastre um novo produto no cardápio.
+                </p>
+            </div>
+
+            <a href="produtos.html" class="btn-voltar">
+                ← Voltar
+            </a>
+
+        </div>
+
+        <section class="form-card">
+
+            <form id="formProduto">
+
+                <div class="form-grid">
+
+                    <div class="form-group campo-nome">
+
+                        <label for="nome">
+                            Nome do produto *
+                        </label>
+
+                        <input type="text" id="nome" name="nome" placeholder="Ex: X-Bacon" maxlength="100" required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="categoria">
+                            Categoria *
+                        </label>
+
+                        <select id="categoria" name="categoria" required>
+
+                            <option value="">
+                                Selecione uma categoria
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="preco">
+                            Preço *
+                        </label>
+
+                        <input type="number" id="preco" name="preco" placeholder="0,00" min="0" step="0.01" required>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="setor">
+                            Setor de destino *
+                        </label>
+
+                        <select id="setor" name="setor" required>
+
+                            <option value="">
+                                Selecione o setor
+                            </option>
+
+                            <option value="SALÃO">
+                                Salão
+                            </option>
+
+                            <option value="COZINHA">
+                                Cozinha
+                            </option>
+
+                        </select>
+
+                        <small>
+                            Define para qual setor o item será enviado.
+                        </small>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="status">
+                            Status *
+                        </label>
+
+                        <select id="status" name="status" required>
+
+                            <option value="Ativo">
+                                Ativo
+                            </option>
+
+                            <option value="Inativo">
+                                Inativo
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group campo-descricao">
+
+                        <label for="descricao">
+                            Descrição
+                        </label>
+
+                        <textarea id="descricao" name="descricao" rows="5" maxlength="500"
+                            placeholder="Descreva os detalhes do produto..."></textarea>
+
+                    </div>
+
+                </div>
+
+                <!-- Imagem -->
+                <div class="imagem-section">
+
+                    <label class="titulo-imagem">
+                        Imagem do produto
+                    </label>
+
+                    <div class="imagem-area">
+
+                        <div class="preview-container">
+
+                            <img id="previewImagem" src="" alt="Pré-visualização do produto">
+
+                            <div id="semImagem" class="sem-imagem">
+                                🍔
+                            </div>
+
+                        </div>
+
+                        <div class="imagem-info">
+
+                            <p>
+                                Selecione uma imagem para o produto.
+                            </p>
+
+                            <label for="imagem" class="btn-imagem">
+                                Escolher imagem
+                            </label>
+
+                            <input type="file" id="imagem" name="imagem" accept="image/*">
+
+                            <small>
+                                Formatos recomendados: JPG, PNG ou WEBP.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div id="mensagem" class="mensagem"></div>
+
+                <!-- Ações -->
+                <div class="form-actions">
+
+                    <a href="produtos.html" class="btn-cancelar">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="btn-salvar" id="btnSalvar">
+                        Salvar produto
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <script src="js/produto-cadastro.js"></script>
+
+</body>
+
+</html>

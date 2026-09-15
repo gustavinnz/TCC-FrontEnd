@@ -1,59 +1,5 @@
-const btnFiltrar = document.getElementById("btnFiltrar");
-const btnAtualizar = document.getElementById("btnAtualizar");
-const btnRelatorios = document.getElementById("btnRelatorios");
-const periodo = document.getElementById("periodo");
-const chartTooltip = document.getElementById("chartTooltip");
-const tooltipPeriodo = document.getElementById("tooltipPeriodo");
-const tooltipValor = document.getElementById("tooltipValor");
+/*DADOS TEMPORÁRIOS*/
 
-
-// FILTRAR
-btnFiltrar.addEventListener("click", function () {
-
-    alert("Filtro aplicado para: " + periodo.options[periodo.selectedIndex].text);
-
-});
-
-
-// ATUALIZAR
-btnAtualizar.addEventListener("click", function () {
-
-    btnAtualizar.textContent = "ATUALIZANDO...";
-    btnAtualizar.disabled = true;
-
-    setTimeout(function () {
-
-        btnAtualizar.textContent = "ATUALIZAR";
-        btnAtualizar.disabled = false;
-
-        alert("Dashboard atualizado com sucesso!");
-
-    }, 1000);
-
-});
-
-
-// VER RELATÓRIOS
-btnRelatorios.addEventListener("click", function () {
-
-    alert("Tela de relatórios será implementada posteriormente.");
-
-});
-
-// ============================================
-// DASHBOARD - HAWKCYBER
-// ============================================
-
-
-// ============================================
-// DADOS TEMPORÁRIOS
-// ============================================
-//
-// Estes valores são apenas para testar o gráfico.
-//
-// Futuramente estes dados serão substituídos
-// pelos dados recebidos do Back-end.
-//
 
 const dadosGraficos = {
 
@@ -92,15 +38,74 @@ const dadosGraficos = {
 };
 
 
-// ============================================
-// ELEMENTOS
-// ============================================
+/* =====================================================
+   MÉTODOS DE PAGAMENTO
+   ===================================================== */
 
-const chartButtons =
-    document.querySelectorAll(".chart-btn");
+const dadosPagamentos = [
 
-const chartDescription =
-    document.getElementById("chartDescription");
+    {
+        metodo: "Cartão",
+        valor: 4200,
+        quantidade: 52
+    },
+
+    {
+        metodo: "Dinheiro",
+        valor: 1850,
+        quantidade: 21
+    },
+
+    {
+        metodo: "Pix",
+        valor: 5600,
+        quantidade: 73
+    }
+
+];
+
+
+/* =====================================================
+   PRODUTOS MAIS VENDIDOS
+   =====================================================
+
+   Futuramente esses dados virão dos produtos cadastrados
+   pelo ADM e das vendas registradas pelo sistema.
+*/
+
+let produtosMaisVendidos = [
+
+    {
+        nome: "Hambúrguer",
+        quantidade: 82
+    },
+
+    {
+        nome: "Batata Frita",
+        quantidade: 67
+    },
+
+    {
+        nome: "Refrigerante",
+        quantidade: 61
+    },
+
+    {
+        nome: "X-Salada",
+        quantidade: 48
+    },
+
+    {
+        nome: "Suco Natural",
+        quantidade: 35
+    }
+
+];
+
+
+/* =====================================================
+   ELEMENTOS DO GRÁFICO
+   ===================================================== */
 
 const linhaGrafico =
     document.getElementById("linhaGrafico");
@@ -114,10 +119,19 @@ const chartLabels =
 const chartY =
     document.getElementById("chartY");
 
+const chartTooltip =
+    document.getElementById("chartTooltip");
 
-// ============================================
-// FORMATAR DINHEIRO
-// ============================================
+const tooltipPeriodo =
+    document.getElementById("tooltipPeriodo");
+
+const tooltipValor =
+    document.getElementById("tooltipValor");
+
+
+/* =====================================================
+   FORMATAÇÃO
+   ===================================================== */
 
 function formatarMoeda(valor) {
 
@@ -130,352 +144,727 @@ function formatarMoeda(valor) {
 }
 
 
-// ============================================
-// ATUALIZAR ESCALA VERTICAL
-// ============================================
+/* =====================================================
+   ESCALA DO GRÁFICO
+   ===================================================== */
 
 function atualizarEscala(dados) {
 
-    const valores = dados.map(item => item.valor);
+    const valores =
+        dados.map(item => item.valor);
 
-    const maiorValor = Math.max(...valores);
+    const maiorValor =
+        Math.max(...valores);
 
-    // Cria uma margem de 10% acima do maior valor
-    const valorMaximo =
-        maiorValor > 0
-            ? maiorValor * 1.1
-            : 100;
+    const maximo =
+        maiorValor * 1.1;
 
     chartY.innerHTML = "";
+
 
     for (let i = 4; i >= 0; i--) {
 
         const valor =
-            (valorMaximo / 4) * i;
+            maximo * (i / 4);
 
-        const span =
+        const elemento =
             document.createElement("span");
 
-        span.textContent =
+        elemento.textContent =
             formatarMoeda(valor);
 
-        chartY.appendChild(span);
+        chartY.appendChild(elemento);
     }
 
-    return valorMaximo;
 }
 
 
-// ============================================
-// DESENHAR GRÁFICO
-// ============================================
+/* =====================================================
+   GRÁFICO DE FATURAMENTO
+   ===================================================== */
 
 function atualizarGrafico(dados) {
 
     if (!dados || dados.length === 0) {
-
-        linhaGrafico.setAttribute("points", "");
-
-        pontosGrafico.innerHTML = "";
-
-        chartLabels.innerHTML = "";
-
         return;
     }
 
 
-    const largura = 700;
-    const altura = 250;
-    const margem = 20;
+    atualizarEscala(dados);
 
+
+    const valores =
+        dados.map(item => item.valor);
 
     const maiorValor =
-        Math.max(
-            ...dados.map(item => item.valor)
-        );
+        Math.max(...valores) * 1.1;
 
 
-    const valorMaximo =
-        maiorValor > 0
-            ? maiorValor * 1.1
-            : 100;
+    const largura = 1000;
+
+    const altura = 250;
+
+    const margemX = 30;
+
+    const margemY = 15;
 
 
-    const distanciaX =
+    const espaco =
         dados.length === 1
             ? 0
-            : (largura - margem * 2) /
+            : (largura - margemX * 2) /
               (dados.length - 1);
 
 
-    let pontosLinha = "";
-
-
-    pontosGrafico.innerHTML = "";
-    chartLabels.innerHTML = "";
-
-
-    dados.forEach((item, index) => {
+    const pontos = dados.map((item, index) => {
 
         const x =
-            margem +
-            (index * distanciaX);
-
-
-        const percentual =
-            item.valor / valorMaximo;
+            dados.length === 1
+                ? largura / 2
+                : margemX + (index * espaco);
 
 
         const y =
             altura -
-            margem -
-            (
-                percentual *
-                (altura - margem * 2)
-            );
+            margemY -
+            ((item.valor / maiorValor) *
+            (altura - margemY * 2));
 
 
-        pontosLinha +=
-            `${x},${y} `;
+        return {
+            x,
+            y,
+            item
+        };
+
+    });
 
 
-        // ================================
-        // CRIA PONTO
-        // ================================
+    linhaGrafico.setAttribute(
+        "points",
+        pontos
+            .map(p => `${p.x},${p.y}`)
+            .join(" ")
+    );
 
-        const ponto =
+
+    pontosGrafico.innerHTML = "";
+
+
+    chartLabels.innerHTML = "";
+
+
+    pontos.forEach((ponto, index) => {
+
+
+        /* PONTO */
+
+        const circle =
             document.createElementNS(
                 "http://www.w3.org/2000/svg",
                 "circle"
             );
 
 
-        ponto.setAttribute("cx", x);
-        ponto.setAttribute("cy", y);
-        ponto.setAttribute("r", "6");
+        circle.setAttribute(
+            "cx",
+            ponto.x
+        );
+
+        circle.setAttribute(
+            "cy",
+            ponto.y
+        );
+
+        circle.setAttribute(
+            "r",
+            "6"
+        );
 
 
-        // ================================
-        // MINI CARD
-        // ================================
-
-        ponto.addEventListener(
+        circle.addEventListener(
             "mouseenter",
-            function () {
-
-                tooltipPeriodo.textContent =
-                    item.periodo;
-
-                tooltipValor.textContent =
-                    formatarMoeda(item.valor);
-
-
-                const svg =
-                    document.getElementById(
-                        "graficoLinha"
-                    );
-
-
-                const rect =
-                    svg.getBoundingClientRect();
-
-
-                const escalaX =
-                    rect.width / 700;
-
-                const escalaY =
-                    rect.height / 250;
-
-
-                chartTooltip.style.left =
-                    `${x * escalaX}px`;
-
-                chartTooltip.style.top =
-                    `${y * escalaY}px`;
-
-
-                chartTooltip.style.display =
-                    "block";
-            }
+            () => mostrarTooltip(ponto)
         );
 
 
-        ponto.addEventListener(
+        circle.addEventListener(
             "mouseleave",
-            function () {
-
-                chartTooltip.style.display =
-                    "none";
-
-            }
+            esconderTooltip
         );
 
 
-        pontosGrafico.appendChild(ponto);
+        pontosGrafico.appendChild(circle);
 
 
-        // ================================
-        // LABEL
-        // ================================
+        /* LABEL */
 
         const label =
             document.createElement("span");
 
         label.textContent =
-            item.periodo;
+            ponto.item.periodo;
 
         chartLabels.appendChild(label);
 
     });
 
 
-    // ================================
-    // DESENHA A LINHA
-    // ================================
+    animarGrafico();
 
-    linhaGrafico.classList.remove(
-        "animando"
-    );
+}
 
 
-    // Força o navegador a reiniciar
-    // a animação
+/* =====================================================
+   ANIMAÇÃO
+   ===================================================== */
 
-    void linhaGrafico.offsetWidth;
+function animarGrafico() {
 
-
-    linhaGrafico.setAttribute(
-        "points",
-        pontosLinha.trim()
-    );
+    const comprimento =
+        linhaGrafico.getTotalLength();
 
 
-    linhaGrafico.classList.add(
-        "animando"
-    );
+    linhaGrafico.style.strokeDasharray =
+        comprimento;
+
+    linhaGrafico.style.strokeDashoffset =
+        comprimento;
 
 
-    // ================================
-    // ANIMA OS PONTOS
-    // ================================
+    linhaGrafico.getBoundingClientRect();
+
+
+    linhaGrafico.style.transition =
+        "stroke-dashoffset 0.8s ease";
+
+
+    linhaGrafico.style.strokeDashoffset =
+        "0";
+
 
     const pontos =
-        pontosGrafico.querySelectorAll(
-            "circle"
-        );
+        pontosGrafico.querySelectorAll("circle");
 
 
     pontos.forEach((ponto, index) => {
 
-        ponto.style.animationDelay =
-            `${index * 0.08}s`;
+        ponto.style.opacity = "0";
 
-        ponto.classList.add(
-            "aparecer"
+        ponto.style.transform = "scale(0)";
+
+
+        setTimeout(() => {
+
+            ponto.style.transition =
+                "opacity 0.25s ease, transform 0.25s ease";
+
+            ponto.style.opacity = "1";
+
+            ponto.style.transform = "scale(1)";
+
+        }, index * 80);
+
+    });
+
+}
+
+
+/* =====================================================
+   TOOLTIP
+   ===================================================== */
+
+function mostrarTooltip(ponto) {
+
+    tooltipPeriodo.textContent =
+        ponto.item.periodo;
+
+    tooltipValor.textContent =
+        formatarMoeda(ponto.item.valor);
+
+
+    chartTooltip.style.display =
+        "block";
+
+
+    const svg =
+        document.getElementById(
+            "graficoFaturamento"
+        );
+
+
+    const rect =
+        svg.getBoundingClientRect();
+
+
+    const x =
+        (ponto.x / 1000) *
+        rect.width;
+
+
+    const y =
+        (ponto.y / 250) *
+        rect.height;
+
+
+    chartTooltip.style.left =
+        `${x}px`;
+
+    chartTooltip.style.top =
+        `${y}px`;
+
+}
+
+
+function esconderTooltip() {
+
+    chartTooltip.style.display =
+        "none";
+
+}
+
+
+/* =====================================================
+   BOTÕES SEMANA / MÊS / ANO
+   ===================================================== */
+
+document.querySelectorAll(".chart-btn")
+    .forEach(botao => {
+
+        botao.addEventListener(
+            "click",
+            function () {
+
+                document
+                    .querySelectorAll(".chart-btn")
+                    .forEach(btn => {
+
+                        btn.classList.remove("active");
+
+                    });
+
+
+                this.classList.add("active");
+
+
+                const periodo =
+                    this.dataset.chart;
+
+
+                atualizarGrafico(
+                    dadosGraficos[periodo]
+                );
+
+            }
         );
 
     });
 
 
-    // ================================
-    // ESCALA
-    // ================================
+/* =====================================================
+   MÉTODOS DE PAGAMENTO
+   ===================================================== */
 
-    atualizarEscala(dados);
-}
+function atualizarPagamentos() {
 
+    const container =
+        document.getElementById(
+            "paymentBars"
+        );
 
-// ============================================
-// DESCRIÇÃO
-// ============================================
-
-function atualizarDescricao(periodo) {
-
-    if (periodo === "semana") {
-
-        chartDescription.textContent =
-            "Faturamento dos últimos 7 dias";
-
-    }
-
-    else if (periodo === "mes") {
-
-        chartDescription.textContent =
-            "Faturamento das últimas semanas";
-
-    }
-
-    else if (periodo === "ano") {
-
-        chartDescription.textContent =
-            "Faturamento dos últimos 12 meses";
-
-    }
-
-}
+    const resumo =
+        document.getElementById(
+            "paymentSummary"
+        );
 
 
-// ============================================
-// TROCAR GRÁFICO
-// ============================================
+    container.innerHTML = "";
 
-chartButtons.forEach(button => {
-
-    button.addEventListener(
-        "click",
-        function () {
-
-            const periodo =
-                this.dataset.chart;
+    resumo.innerHTML = "";
 
 
-            // Remove ativo
-            chartButtons.forEach(btn => {
-
-                btn.classList.remove(
-                    "active"
-                );
-
-            });
+    const maiorValor =
+        Math.max(
+            ...dadosPagamentos.map(
+                item => item.valor
+            )
+        );
 
 
-            // Ativa botão clicado
-
-            this.classList.add(
-                "active"
-            );
+    let metodoMaisUtilizado =
+        dadosPagamentos[0];
 
 
-            // Atualiza gráfico
+    dadosPagamentos.forEach(item => {
 
-            atualizarGrafico(
-                dadosGraficos[periodo]
-            );
+        if (
+            item.quantidade >
+            metodoMaisUtilizado.quantidade
+        ) {
 
-
-            // Atualiza texto
-
-            atualizarDescricao(
-                periodo
-            );
+            metodoMaisUtilizado = item;
 
         }
+
+
+        /* COLUNA */
+
+        const coluna =
+            document.createElement("div");
+
+        coluna.className =
+            "payment-column";
+
+
+        const barra =
+            document.createElement("div");
+
+        barra.className =
+            "payment-bar";
+
+
+        const altura =
+            (item.valor / maiorValor) * 100;
+
+
+        barra.style.height =
+            `${altura}%`;
+
+
+        barra.title =
+            `${item.metodo}: ${formatarMoeda(item.valor)} • ${item.quantidade} pagamentos`;
+
+
+        const label =
+            document.createElement("span");
+
+        label.className =
+            "payment-label";
+
+        label.textContent =
+            item.metodo;
+
+
+        coluna.appendChild(barra);
+
+        coluna.appendChild(label);
+
+        container.appendChild(coluna);
+
+
+        /* RESUMO */
+
+        const resumoItem =
+            document.createElement("div");
+
+        resumoItem.className =
+            "payment-summary-item";
+
+
+        resumoItem.innerHTML = `
+            <strong>${formatarMoeda(item.valor)}</strong>
+            <span>${item.quantidade} pagamentos</span>
+        `;
+
+
+        resumo.appendChild(resumoItem);
+
+    });
+
+
+    document.getElementById(
+        "metodoMaisUtilizado"
+    ).textContent =
+        `${metodoMaisUtilizado.metodo} (${metodoMaisUtilizado.quantidade})`;
+
+}
+
+
+/* =====================================================
+   PRODUTOS MAIS VENDIDOS
+   ===================================================== */
+
+function atualizarProdutos() {
+
+    const container =
+        document.getElementById(
+            "productsChart"
+        );
+
+
+    container.innerHTML = "";
+
+
+    if (
+        !produtosMaisVendidos ||
+        produtosMaisVendidos.length === 0
+    ) {
+
+        container.innerHTML =
+            "<p>Nenhum produto vendido no período.</p>";
+
+        return;
+
+    }
+
+
+    const maiorQuantidade =
+        Math.max(
+            ...produtosMaisVendidos.map(
+                produto => produto.quantidade
+            )
+        );
+
+
+    produtosMaisVendidos.forEach(produto => {
+
+        const linha =
+            document.createElement("div");
+
+        linha.className =
+            "product-row";
+
+
+        const nome =
+            document.createElement("span");
+
+        nome.className =
+            "product-name";
+
+        nome.textContent =
+            produto.nome;
+
+
+        const barraContainer =
+            document.createElement("div");
+
+        barraContainer.className =
+            "product-bar-container";
+
+
+        const barra =
+            document.createElement("div");
+
+        barra.className =
+            "product-bar";
+
+
+        barra.style.width =
+            `${(produto.quantidade / maiorQuantidade) * 100}%`;
+
+
+        const quantidade =
+            document.createElement("span");
+
+        quantidade.className =
+            "product-quantity";
+
+        quantidade.textContent =
+            produto.quantidade;
+
+
+        barraContainer.appendChild(
+            barra
+        );
+
+
+        linha.appendChild(nome);
+
+        linha.appendChild(
+            barraContainer
+        );
+
+        linha.appendChild(
+            quantidade
+        );
+
+
+        container.appendChild(linha);
+
+    });
+
+}
+
+
+/* =====================================================
+   ATUALIZAR DASHBOARD
+   ===================================================== */
+
+async function atualizarDashboard() {
+
+    /*
+    FUTURO BACKEND:
+
+    const periodo =
+        document.getElementById(
+            "periodoDashboard"
+        ).value;
+
+
+    const resposta =
+        await fetch(
+            `/api/dashboard?periodo=${periodo}`
+        );
+
+
+    const dados =
+        await resposta.json();
+
+
+    document.getElementById(
+        "cardFaturamento"
+    ).textContent =
+        formatarMoeda(dados.faturamento);
+
+
+    document.getElementById(
+        "cardCustos"
+    ).textContent =
+        formatarMoeda(dados.custos);
+
+
+    document.getElementById(
+        "cardLucro"
+    ).textContent =
+        formatarMoeda(dados.lucro);
+
+
+    dadosGraficos.semana =
+        dados.graficos.semana;
+
+
+    dadosGraficos.mes =
+        dados.graficos.mes;
+
+
+    dadosGraficos.ano =
+        dados.graficos.ano;
+
+
+    dadosPagamentos.length = 0;
+
+    dados.pagamentos.forEach(item => {
+        dadosPagamentos.push(item);
+    });
+
+
+    produtosMaisVendidos =
+        dados.produtosMaisVendidos;
+
+
+    atualizarGrafico(
+        dadosGraficos.semana
     );
 
-});
+    atualizarPagamentos();
+
+    atualizarProdutos();
+    */
 
 
-// ============================================
-// GRÁFICO INICIAL
-// ============================================
-//
-// Semana aparece primeiro.
-//
+    /* Simulação temporária */
 
-atualizarGrafico(
-    dadosGraficos.semana
+    const botaoAtivo =
+        document.querySelector(
+            ".chart-btn.active"
+        );
+
+
+    const periodo =
+        botaoAtivo.dataset.chart;
+
+
+    atualizarGrafico(
+        dadosGraficos[periodo]
+    );
+
+
+    atualizarPagamentos();
+
+    atualizarProdutos();
+
+}
+
+
+/* =====================================================
+   BOTÃO ATUALIZAR
+   ===================================================== */
+
+document.getElementById(
+    "btnAtualizar"
+).addEventListener(
+    "click",
+    async function () {
+
+        this.disabled = true;
+
+        this.textContent =
+            "ATUALIZANDO...";
+
+
+        await atualizarDashboard();
+
+
+        setTimeout(() => {
+
+            this.disabled = false;
+
+            this.textContent =
+                "ATUALIZAR";
+
+        }, 600);
+
+    }
 );
 
-atualizarDescricao(
-    "semana"
+
+/* =====================================================
+   FILTRAR
+   ===================================================== */
+
+document.getElementById(
+    "btnFiltrar"
+).addEventListener(
+    "click",
+    function () {
+
+        const periodo =
+            document.getElementById(
+                "periodoDashboard"
+            ).value;
+
+
+        console.log(
+            "Filtro selecionado:",
+            periodo
+        );
+
+
+        atualizarDashboard();
+
+    }
 );
+
+
+/* =====================================================
+   RELATÓRIOS
+   ===================================================== */
+
+document.getElementById(
+    "btnRelatorios"
+).addEventListener(
+    "click",
+    function () {
+
+        window.location.href =
+            "relatorios.html";
+
+    }
+);
+
+
+/* =====================================================
+   INICIALIZAÇÃO
+   ===================================================== */
+
+atualizarDashboard();
