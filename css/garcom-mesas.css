@@ -34,6 +34,12 @@ body {
     color: var(--marrom-escuro);
 }
 
+.topbar-left{
+    display: flex;
+    align-items: center;
+    gap: 10rem;
+}
+
 /* Conteúdo */
 
 .main-content {

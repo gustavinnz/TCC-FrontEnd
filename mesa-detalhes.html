@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detalhes da Mesa</title>
+
+    <link rel="stylesheet" href="css/mesa-detalhes.css">
+</head>
+
+<body>
+
+    <!-- Topbar -->
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <div class="logo">
+                <a href="dashboard.html">
+                    <img src="imgs/img_logo.png" alt="Logo">
+                </a>
+            </div>
+
+            <a href="garcom-mesas.html" class="btn-voltar-topbar">
+                ← Mesas
+            </a>
+
+        </div>
+
+        <div class="topbar-right">
+            <span class="usuario">Usuário</span>
+            <span class="perfil">👤</span>
+            <span class="conexao">● Online</span>
+
+            <a href="notificacoes.html" class="notificacao">
+                🔔
+            </a>
+        </div>
+
+    </header>
+
+
+    <!-- Menu lateral -->
+
+    <aside class="sidebar">
+
+        <nav>
+
+            <a href="dashboard.html" class="menu-item">
+                <span>📊</span>
+                Dashboard
+            </a>
+
+            <a href="funcionarios.html" class="menu-item">
+                <span>👥</span>
+                Funcionários
+            </a>
+
+            <a href="categorias.html" class="menu-item">
+                <span>📁</span>
+                Categorias
+            </a>
+
+            <a href="produtos.html" class="menu-item">
+                <span>🍔</span>
+                Produtos
+            </a>
+
+            <a href="mesas.html" class="menu-item active">
+                <span>🪑</span>
+                Mesas
+            </a>
+
+            <a href="estoque.html" class="menu-item">
+                <span>📦</span>
+                Estoque
+            </a>
+
+            <a href="caixa.html" class="menu-item">
+                <span>💰</span>
+                Caixa
+            </a>
+
+            <a href="relatorios.html" class="menu-item">
+                <span>📈</span>
+                Relatórios
+            </a>
+
+            <a href="configuracoes.html" class="menu-item">
+                <span>⚙️</span>
+                Configurações
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="perfil.html" class="menu-item">
+                <span>👤</span>
+                Meu perfil
+            </a>
+
+            <a href="login.html" class="menu-item logout">
+                <span>🚪</span>
+                Sair
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Conteúdo -->
+
+    <main class="main-content">
+
+        <div class="page-header">
+
+            <div>
+                <h1 id="tituloMesa">Mesa 02</h1>
+                <p>Detalhes e acompanhamento da mesa.</p>
+            </div>
+
+            <div class="header-actions">
+
+                <button class="btn-secondary" id="btnAdicionarPedido">
+                    + Adicionar pedido
+                </button>
+
+                <button class="btn-primary" id="btnAdicionarItem">
+                    + Adicionar item
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Informações da mesa -->
+
+        <section class="info-mesa">
+
+            <div class="info-item">
+                <span class="info-label">Mesa</span>
+                <strong id="numeroMesa">02</strong>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">Capacidade</span>
+                <strong id="capacidadeMesa">4 lugares</strong>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">Cliente</span>
+                <strong id="clienteMesa">Não informado</strong>
+            </div>
+
+            <div class="info-item">
+                <span class="info-label">Status</span>
+                <span class="badge badge-ocupada" id="statusMesa">
+                    OCUPADA
+                </span>
+            </div>
+
+        </section>
+
+
+        <!-- Pedidos -->
+
+        <section class="pedidos-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Pedidos da mesa</h2>
+                    <p>Itens e status dos pedidos realizados.</p>
+                </div>
+
+                <button class="btn-secondary" id="btnVerConta">
+                    VER CONTA
+                </button>
+
+            </div>
+
+
+            <div class="pedido-card">
+
+                <div class="pedido-header">
+
+                    <div>
+                        <strong>Pedido #152</strong>
+                        <span class="pedido-horario">
+                            Hoje, 13:42
+                        </span>
+                    </div>
+
+                    <button class="btn-detalhes" id="btnVerPedido">
+                        VER PEDIDO
+                    </button>
+
+                </div>
+
+
+                <!-- Cozinha -->
+
+                <div class="setor">
+
+                    <div class="setor-header">
+                        <h3>🍳 Cozinha</h3>
+                    </div>
+
+                    <div class="item-pedido">
+
+                        <div>
+                            <strong>Hambúrguer</strong>
+                            <span>1 unidade</span>
+                        </div>
+
+                        <span class="status-item preparo">
+                            EM PREPARO
+                        </span>
+
+                    </div>
+
+
+                    <div class="item-pedido">
+
+                        <div>
+                            <strong>Batata Frita</strong>
+                            <span>1 unidade</span>
+                        </div>
+
+                        <span class="status-item pronto">
+                            PRONTO
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Salão -->
+
+                <div class="setor">
+
+                    <div class="setor-header">
+                        <h3>🍹 Salão</h3>
+                    </div>
+
+                    <div class="item-pedido">
+
+                        <div>
+                            <strong>Refrigerante</strong>
+                            <span>2 unidades</span>
+                        </div>
+
+                        <span class="status-item entregue">
+                            ENTREGUE
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Total -->
+
+        <section class="resumo-conta">
+
+            <div>
+                <span>Total da mesa</span>
+                <strong>R$ 86,50</strong>
+            </div>
+
+            <div class="acoes-conta">
+
+                <button class="btn-secondary" id="btnFechamento">
+                    SOLICITAR FECHAMENTO
+                </button>
+
+                <button class="btn-primary" id="btnConta">
+                    VER CONTA
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/mesa-detalhes.js"></script>
+
+</body>
+
+</html>
