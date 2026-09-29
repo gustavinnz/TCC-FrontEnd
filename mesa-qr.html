@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QR Code - HawkCyber</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mesa-qr.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+</head>
+
+<body>
+
+    <!-- Topbar -->
+    <header class="topbar">
+
+        <div class="logo">
+            <a href="dashboard.html">
+                <img src="imgs/img_logo.png" alt="Logo">
+            </a>
+        </div>
+
+        <div class="topbar-info">
+
+            <span class="connection">
+                <span class="connection-dot"></span>
+                Conectado
+            </span>
+
+            <span class="notification">🔔</span>
+
+            <div class="user-info">
+                <strong>Usuário</strong>
+                <small>ADM</small>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- Menu lateral -->
+    <aside class="sidebar">
+
+        <nav>
+
+            <a href="dashboard.html" class="menu-item">
+                <span>📊</span>
+                Dashboard
+            </a>
+
+            <a href="funcionarios.html" class="menu-item">
+                <span>👥</span>
+                Funcionários
+            </a>
+
+            <a href="categorias.html" class="menu-item">
+                <span>📁</span>
+                Categorias
+            </a>
+
+            <a href="produtos.html" class="menu-item">
+                <span>🍔</span>
+                Produtos
+            </a>
+
+            <a href="mesas.html" class="menu-item active">
+                <span>🪑</span>
+                Mesas
+            </a>
+
+            <a href="estoque.html" class="menu-item">
+                <span>📦</span>
+                Estoque
+            </a>
+
+            <a href="caixa.html" class="menu-item">
+                <span>💰</span>
+                Caixa
+            </a>
+
+            <a href="relatorios.html" class="menu-item">
+                <span>📈</span>
+                Relatórios
+            </a>
+
+            <a href="configuracoes.html" class="menu-item">
+                <span>⚙️</span>
+                Configurações
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="perfil.html" class="menu-item">
+                <span>👤</span>
+                Meu perfil
+            </a>
+
+            <a href="login.html" class="menu-item logout">
+                <span>🚪</span>
+                Sair
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Conteúdo -->
+    <main class="main-content">
+
+        <div class="page-header">
+
+            <div>
+                <h1>QR Code da Mesa</h1>
+
+                <p>
+                    Gere ou visualize o QR Code utilizado pelos clientes.
+                </p>
+            </div>
+
+        </div>
+
+
+        <section class="qr-card">
+
+            <div class="mesa-info">
+
+                <h2 id="mesaNome">
+                    Mesa 01
+                </h2>
+
+                <span id="mesaStatus" class="status status-livre">
+                    LIVRE
+                </span>
+
+                <p id="mesaCapacidade">
+                    Capacidade: 2 lugares
+                </p>
+
+            </div>
+
+
+            <div class="qr-area">
+
+                <div class="qr-placeholder" id="qrCode">
+
+                    <div class="qr-pattern">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                </div>
+
+                <p class="qr-description">
+                    Aponte a câmera do celular para o QR Code
+                    para acessar o cardápio da mesa.
+                </p>
+
+            </div>
+
+
+            <div class="qr-url">
+
+                <label>
+                    Endereço do cardápio
+                </label>
+
+                <div class="url-box">
+
+                    <input type="text" id="urlCardapio" readonly>
+
+                    <button type="button" id="btnCopiar">
+                        Copiar
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="qr-actions">
+
+                <a href="mesas.html" class="btn-secondary">
+                    Voltar
+                </a>
+
+                <button type="button" class="btn-primary" id="btnGerar">
+                    Gerar QR Code
+                </button>
+
+                <button type="button" class="btn-primary" id="btnImprimir">
+                    Imprimir
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/mesa-qr.js"></script>
+
+</body>
+
+</html>

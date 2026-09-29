@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Mesas</title>
+    <title>Painel de Mesas</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/mesas.css">
+    <link rel="stylesheet" href="css/garcom-mesas.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/sidebar.css">
 </head>
@@ -24,20 +23,26 @@
             </a>
         </div>
 
+        <div>
+            <a href="mesas.html" class="btn-primary" style="text-decoration: none;">
+                < Voltar
+            </a>
+        </div>
+
         <div class="topbar-right">
 
-            <div class="connection">
+            <span class="connection">
                 <span class="connection-dot"></span>
-                <span>Conectado</span>
-            </div>
+                Conectado
+            </span>
 
-            <button class="notification-btn" title="Notificações">
+            <a href="notificacoes.html" class="notificacao">
                 🔔
-            </button>
+            </a>
 
             <div class="user-info">
                 <strong>Usuário</strong>
-                <span>ADM</span>
+                <small>ADM</small>
             </div>
 
         </div>
@@ -112,70 +117,77 @@
 
     </aside>
 
-    <!-- Conteúdo -->
+    <!-- Conteúdo principal -->
     <main class="main-content">
 
         <div class="page-header">
 
             <div>
-                <h1>Mesas</h1>
-                <p>Gerencie as mesas do estabelecimento.</p>
+                <h1>Painel de Mesas</h1>
+                <p>Acompanhe as mesas e os pedidos do salão.</p>
             </div>
 
-            <a href="garcom-mesas.html" class="btn-primary">
-                Tela do Garçom
-            </a>
-
-            <a href="mesa-cadastro.html" class="btn-primary">
-                + Nova Mesa
-            </a>
+            <button class="btn-primary" id="btnNotificacoes">
+                🔔 Notificações
+            </button>
 
         </div>
 
-        <!-- Filtros -->
-        <section class="filters">
+        <section class="filtros">
 
-            <div class="filter-group">
+            <div class="campo-busca">
+                <span>🔍</span>
 
-                <label for="busca">Buscar mesa</label>
-
-                <input type="text" id="busca" placeholder="Número da mesa...">
-
+                <input
+                    type="text"
+                    id="buscaMesa"
+                    placeholder="Buscar mesa..."
+                >
             </div>
 
-            <div class="filter-group">
+            <div class="filtros-status">
 
-                <label for="status">Status</label>
+                <button class="filtro active" data-filtro="TODAS">
+                    TODAS
+                </button>
 
-                <select id="status">
+                <button class="filtro" data-filtro="LIVRE">
+                    LIVRES
+                </button>
 
-                    <option value="">Todos</option>
-                    <option value="LIVRE">Livre</option>
-                    <option value="OCUPADA">Ocupada</option>
-                    <option value="RESERVADA">Reservada</option>
-                    <option value="INDISPONÍVEL">Indisponível</option>
+                <button class="filtro" data-filtro="OCUPADA">
+                    OCUPADAS
+                </button>
 
-                </select>
+                <button class="filtro" data-filtro="RESERVADA">
+                    RESERVADAS
+                </button>
+
+                <button class="filtro" data-filtro="NOTIFICACAO">
+                    🔔 COM NOTIFICAÇÃO
+                </button>
 
             </div>
-
-            <button type="button" id="btnLimpar" class="btn-secondary">
-                Limpar
-            </button>
 
         </section>
 
-        <!-- Contador -->
-        <div class="table-info">
-            <span id="contador">0 mesas encontradas.</span>
-        </div>
+        <section class="mesas-container" id="mesasContainer"></section>
 
-        <!-- Cards das mesas -->
-        <section id="gridMesas" class="mesas-grid"></section>
+        <div class="estado-vazio" id="estadoVazio">
+
+            <div>🪑</div>
+
+            <h2>Nenhuma mesa encontrada</h2>
+
+            <p>
+                Não existem mesas para os filtros selecionados.
+            </p>
+
+        </div>
 
     </main>
 
-    <script src="js/mesas.js"></script>
+    <script src="js/garcom-mesas.js"></script>
 
 </body>
 

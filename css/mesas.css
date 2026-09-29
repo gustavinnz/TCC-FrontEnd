@@ -11,6 +11,7 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 25px;
+    gap: 20px;
 }
 
 .page-header h1 {

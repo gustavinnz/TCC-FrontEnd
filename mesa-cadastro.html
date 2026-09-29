@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro de Mesa</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mesa-cadastro.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+</head>
+
+<body>
+
+    <!-- Topbar -->
+    <header class="topbar">
+
+        <div class="logo">
+            <a href="dashboard.html">
+                <img src="imgs/img_logo.png" alt="Logo">
+            </a>
+        </div>
+
+        <div class="topbar-info">
+
+            <span class="connection">
+                <span class="connection-dot"></span>
+                Conectado
+            </span>
+
+            <span class="notification">🔔</span>
+
+            <div class="user-info">
+                <strong>Usuário</strong>
+                <small>ADM</small>
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Menu lateral -->
+    <aside class="sidebar">
+
+        <nav>
+
+            <a href="dashboard.html" class="menu-item">
+                <span>📊</span>
+                Dashboard
+            </a>
+
+            <a href="funcionarios.html" class="menu-item">
+                <span>👥</span>
+                Funcionários
+            </a>
+
+            <a href="categorias.html" class="menu-item">
+                <span>📁</span>
+                Categorias
+            </a>
+
+            <a href="produtos.html" class="menu-item">
+                <span>🍔</span>
+                Produtos
+            </a>
+
+            <a href="mesas.html" class="menu-item active">
+                <span>🪑</span>
+                Mesas
+            </a>
+
+            <a href="estoque.html" class="menu-item">
+                <span>📦</span>
+                Estoque
+            </a>
+
+            <a href="caixa.html" class="menu-item">
+                <span>💰</span>
+                Caixa
+            </a>
+
+            <a href="relatorios.html" class="menu-item">
+                <span>📈</span>
+                Relatórios
+            </a>
+
+            <a href="configuracoes.html" class="menu-item">
+                <span>⚙️</span>
+                Configurações
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="perfil.html" class="menu-item">
+                <span>👤</span>
+                Meu perfil
+            </a>
+
+            <a href="login.html" class="menu-item logout">
+                <span>🚪</span>
+                Sair
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- Conteúdo -->
+    <main class="main-content">
+
+        <div class="page-header">
+
+            <div>
+                <h1 id="tituloPagina">Nova Mesa</h1>
+                <p id="descricaoPagina">
+                    Cadastre uma nova mesa no estabelecimento.
+                </p>
+            </div>
+
+        </div>
+
+        <section class="form-card">
+
+            <form id="formMesa">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="numero">
+                            Número da mesa
+                        </label>
+
+                        <input type="number" id="numero" min="1" placeholder="Ex.: 10" required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="capacidade">
+                            Capacidade
+                        </label>
+
+                        <input type="number" id="capacidade" min="1" placeholder="Ex.: 4" required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="status">
+                            Status
+                        </label>
+
+                        <select id="status" required>
+
+                            <option value="LIVRE">
+                                Livre
+                            </option>
+
+                            <option value="OCUPADA">
+                                Ocupada
+                            </option>
+
+                            <option value="RESERVADA">
+                                Reservada
+                            </option>
+
+                            <option value="INDISPONÍVEL">
+                                Indisponível
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <a href="mesas.html" class="btn-secondary">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="btn-primary" id="btnSalvar">
+                        Salvar mesa
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <script src="js/mesa-cadastro.js"></script>
+
+</body>
+
+</html>
